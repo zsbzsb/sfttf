@@ -110,7 +110,7 @@ void App::Draw()
 
 	static const char* s = "the quick brown fox jumps over the lazy dog";
 	float X = 5.0f;
-	float Y = 104.0f;
+	float Y = 154.0f;
 	unsigned int Size = myFont->getSize();
 	for (int i = myFont->getSize(); ; ++i)
 	{
