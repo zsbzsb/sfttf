@@ -111,6 +111,7 @@ void App::Draw()
 	static const char* s = "the quick brown fox jumps over the lazy dog";
 	float X = 5.0f;
 	float Y = 104.0f;
+	unsigned int Size = myFont->getSize();
 	for (int i = myFont->getSize(); ; ++i)
 	{
 		myFont->Push();
@@ -137,30 +138,8 @@ void App::Draw()
 	mysnprintf(Buffer, sizeof(Buffer), "%dx%d", myWindow.GetInput().GetMouseX(), myWindow.GetInput().GetMouseY());
 	myFont->drawString(Buffer, 5, 78);
 
-#if 0
-	/*
-		Or, if you have boost::format...
-	*/
-	myFont->drawString(
-		(boost::format("FPS: %.2f")
-		% FPS
-		).str()
-		5, 26);
-
-	myFont->drawString(
-			(boost::format("Avg FPS: %.2f")
-				% myAverageFPS
-			).str()
-			5, 52);
-
-	myFont->drawString(
-			(boost::format("%dx%d")
-				% myWindow.GetInput().GetMouseX()
-				% myWindow.GetInput().GetMouseY()
-			).str(),
-			5, 78);
-#endif
-
+	mysnprintf(Buffer, sizeof(Buffer), "Size: %d", Size);
+	myFont->drawString(Buffer, 5, 104);
 	myFont->Pop();
 }
 

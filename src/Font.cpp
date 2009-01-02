@@ -437,11 +437,7 @@ bool sfttf::Font::cacheGlyphOutline(uint32_t codePoint)
 	Otherwise, we could leak or FT_Done_Glyph could be called twice (crash).
 	*/
 	FreeGlyph f(&Glyph);
-	/*
 	if (0 != FT_Glyph_Stroke(&Glyph, myStroker, 1))
-		return false;
-	*/
-	if (0 != FT_Glyph_StrokeBorder(&Glyph, myStroker, 1, 1))
 		return false;
 
 	if (0 != FT_Glyph_To_Bitmap(&Glyph, FT_RENDER_MODE_NORMAL, 0, 1))
