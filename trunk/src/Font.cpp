@@ -298,7 +298,7 @@ bool sfttf::Font::Initialize(const std::string& Filename)
 		Deinitialize();
 		return false;
 	}
-	if (0 != FT_Stroker_New(myFreeType, &myStroker))
+	if (0 != FT_Stroker_New(reinterpret_cast<FT_Memory>(myFreeType), &myStroker))
 	{
 		Deinitialize();
 		return false;
@@ -311,6 +311,9 @@ bool sfttf::Font::Initialize(const std::string& Filename)
 
 void sfttf::Font::Deinitialize()
 {
+	if (0 != myStroker)
+		FT_Stroker_Done(myStroker);
+
 	if (0 != myFace)
 		assert(0 == FT_Done_Face(myFace));
 
@@ -434,7 +437,11 @@ bool sfttf::Font::cacheGlyphOutline(uint32_t codePoint)
 	Otherwise, we could leak or FT_Done_Glyph could be called twice (crash).
 	*/
 	FreeGlyph f(&Glyph);
+	/*
 	if (0 != FT_Glyph_Stroke(&Glyph, myStroker, 1))
+		return false;
+	*/
+	if (0 != FT_Glyph_StrokeBorder(&Glyph, myStroker, 1, 1))
 		return false;
 
 	if (0 != FT_Glyph_To_Bitmap(&Glyph, FT_RENDER_MODE_NORMAL, 0, 1))

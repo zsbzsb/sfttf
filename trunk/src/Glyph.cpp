@@ -26,7 +26,6 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 **********************************************************************/
 #include <sfttf/Glyph.hpp>
-#include <SFML/Graphics/RenderWindow.hpp>
 
 sfttf::Glyph::PixelBuffer sfttf::Glyph::Pixels;
 
